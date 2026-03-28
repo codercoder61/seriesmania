@@ -8,7 +8,6 @@ function Watch() {
     const [season,setSeason] = useState(1)
     
     const [src,setSrc] = useState(`https://vidsrc.icu/embed/tv/`)
-    const [numberOfEpisodes,setNumberOfEpisodes] = useState(null)
     const [elements, setElements] = useState([]);
     const options = {
         method: 'GET',
@@ -18,31 +17,28 @@ function Watch() {
         }
       };
     useEffect(() => {
-        const fetchData = async () => {
-          try {
-            const response = await fetch(`https://api.themoviedb.org/3/tv/${tvseriesid}`,options);
-            if (!response.ok) {
-              throw new Error('Failed to fetch data');
-            }
-            const result = await response.json();
-            setData(result);
-            setNumberOfEpisodes(result.seasons[0].episode_count)
-              if(result.seasons[0].season_number===1)
-                  setSeason(0)
-              else{
-                  setSeason(1)
-              }
-            //console.log(result)
-          } catch (error) {
-            console.log(error)
-          }
-        };
-    
-        fetchData();
-    
-        return () => {
-        };
-      }, []); 
+  const fetchData = async () => {
+    try {
+      const response = await fetch(`https://api.themoviedb.org/3/tv/${tvseriesid}`, options);
+      if (!response.ok) {
+        throw new Error('Failed to fetch data');
+      }
+      const result = await response.json();
+      setData(result);
+      setNumberOfEpisodes(result.seasons[0].episode_count);
+
+      if (result.seasons[0].season_number === 1) {
+        setSeason(0);
+      } else {
+        setSeason(1);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  fetchData();
+}, [options, tvseriesid]); // ✅ include dependencies
 
       const handleChange1 = (event)=>{
         const selectedSeason = event.target.value;
@@ -107,15 +103,28 @@ function Watch() {
         <span onClick={()=>{setSrc(`https://multiembed.mov/?video_id=`)}} style={{backgroundColor:src===`https://multiembed.mov/?video_id=`?'#000':"unset",cursor:'pointer',color:'rgb(120,120,120)',fontWeight:'bold'}}>SuberEmbed</span>
     </div>
     <div style={{textAlign:'center'}}>
-    <iframe
-src={(src==='https://multiembed.mov/?video_id=')?`${src}${tvseriesid}&tmdb=1&s=${data!==null && data.seasons[0].season_number===1?parseInt(season)+1:season}&e=${episode}`:`${src}${tvseriesid}/${data!==null && data.seasons[0].season_number===1?parseInt(season)+1:season}/${episode}`}
-referrerPolicy="origin"
-            allowFullScreen
-            height="550"
-            scrolling="no"
-            className="max-w-3xl mx-auto px-4 pt-10"
-            style={{border:'none',outline:'none',width:'90%',marginBottom:'50px'}}
-          ></iframe>
+   <iframe
+  title="TV series video player"
+  src={
+    src === 'https://multiembed.mov/?video_id='
+      ? `${src}${tvseriesid}&tmdb=1&s=${
+          data !== null && data.seasons[0].season_number === 1
+            ? parseInt(season) + 1
+            : season
+        }&e=${episode}`
+      : `${src}${tvseriesid}/${
+          data !== null && data.seasons[0].season_number === 1
+            ? parseInt(season) + 1
+            : season
+        }/${episode}`
+  }
+  referrerPolicy="origin"
+  allowFullScreen
+  height="550"
+  scrolling="no"
+  className="max-w-3xl mx-auto px-4 pt-10"
+  style={{ border: 'none', outline: 'none', width: '90%', marginBottom: '50px' }}
+></iframe>
     </div>
     </>
   )
