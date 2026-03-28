@@ -7,14 +7,15 @@ function Body() {
     const [data, setData] = useState(null);
     const [data2, setData2] = useState(null);
 
-    const options = {
+    
+    useEffect(() => {
+        const options = {
         method: 'GET',
         headers: {
           accept: 'application/json',
           Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNmYzOTcwNGJhOTEwMjlkM2NhZDY3MzQwY2E2ODYwMCIsInN1YiI6IjY2MzZhNzk0OTU5MGUzMDEyM2JjNDlhNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ImAuflKe7r_PCIM-jUc8wa9hCTYlwFWQqhQaIXgKVhI'
         }
       };
-    useEffect(() => {
   const fetchData1 = async () => {
     try {
       const response = await axios.get(
