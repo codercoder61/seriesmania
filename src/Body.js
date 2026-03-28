@@ -15,33 +15,33 @@ function Body() {
         }
       };
     useEffect(() => {
-      const fetchData1 = async () => {
-        try {
-          const response = await axios.get('https://api.themoviedb.org/3/tv/popular',options);
-          setData(response.data.results);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-  
-      fetchData1();
+  const fetchData1 = async () => {
+    try {
+      const response = await axios.get(
+        'https://api.themoviedb.org/3/tv/popular',
+        options
+      );
+      setData(response.data.results);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
 
-      const fetchData2 = async () => {
-        try {
-          const response = await axios.get('https://api.themoviedb.org/3/trending/tv/week',options);
-          setData2(response.data.results);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-  
-      fetchData2();
-  
-      // Cleanup function to cancel any pending requests
-      return () => {
-        // Cleanup code here (if needed)
-      };
-    }, []); // Empty dependency array to run effect only once when component mounts
+  const fetchData2 = async () => {
+    try {
+      const response = await axios.get(
+        'https://api.themoviedb.org/3/trending/tv/week',
+        options
+      );
+      setData2(response.data.results);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    }
+  };
+
+  fetchData1();
+  fetchData2();
+}, [options]); // ✅ include it
   return (
     <div>
         <h1 style={{textAlign:'center',color:'white',marginTop:"20px",fontSize:'30px'}}>POPULAR TV SHOWS</h1>
