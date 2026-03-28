@@ -9,14 +9,15 @@ function Watch() {
     
     const [src,setSrc] = useState(`https://vidsrc.icu/embed/tv/`)
     const [elements, setElements] = useState([]);
-    const options = {
+    
+    useEffect(() => {
+        const options = {
         method: 'GET',
         headers: {
           accept: 'application/json',
           Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIyNmYzOTcwNGJhOTEwMjlkM2NhZDY3MzQwY2E2ODYwMCIsInN1YiI6IjY2MzZhNzk0OTU5MGUzMDEyM2JjNDlhNSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.ImAuflKe7r_PCIM-jUc8wa9hCTYlwFWQqhQaIXgKVhI'
         }
       };
-    useEffect(() => {
   const fetchData = async () => {
     try {
       const response = await fetch(`https://api.themoviedb.org/3/tv/${tvseriesid}`, options);
