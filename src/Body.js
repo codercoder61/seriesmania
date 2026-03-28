@@ -42,7 +42,7 @@ function Body() {
 
   fetchData1();
   fetchData2();
-}, [options]); // ✅ include it
+}, []); // ✅ include it
   return (
     <div>
         <h1 style={{textAlign:'center',color:'white',marginTop:"20px",fontSize:'30px'}}>POPULAR TV SHOWS</h1>
