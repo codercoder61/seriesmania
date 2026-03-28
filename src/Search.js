@@ -33,7 +33,7 @@ function Search() {
                 } catch (error) {
                   console.log(error)
                 }
-              }, [query,options]);;
+              }, [query]);;
     
     useEffect(() => {
   const handleKeyPress = (event) => {
