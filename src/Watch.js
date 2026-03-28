@@ -38,7 +38,7 @@ function Watch() {
   };
 
   fetchData();
-}, [options, tvseriesid]); // ✅ include dependencies
+}, [ tvseriesid]); // ✅ include dependencies
 
       const handleChange1 = (event)=>{
         const selectedSeason = event.target.value;
