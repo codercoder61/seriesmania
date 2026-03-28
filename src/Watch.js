@@ -25,7 +25,6 @@ function Watch() {
       }
       const result = await response.json();
       setData(result);
-      setNumberOfEpisodes(result.seasons[0].episode_count);
 
       if (result.seasons[0].season_number === 1) {
         setSeason(0);
@@ -43,13 +42,9 @@ function Watch() {
       const handleChange1 = (event)=>{
         const selectedSeason = event.target.value;
           setSeason(selectedSeason);
-          setNumberOfEpisodes(data.seasons[selectedSeason].episode_count);
-        //console.log(data.seasons[season].episode_count)
-        //console.log(season)
       }
     useEffect(() => {
     if (data && season !== "") {
-      setNumberOfEpisodes(data.seasons[season].episode_count);
       const episodes = [];
           for (let i = 0; i < data.seasons[season].episode_count; i++) {
                 episodes.push(<option key={i}>{i + 1}</option>);
