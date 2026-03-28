@@ -16,7 +16,7 @@ function Search() {
         }
       };
 
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
                 try {
                   const response = await fetch(`https://api.themoviedb.org/3/search/tv?query=${query}`,options);
                   if (!response.ok) {
@@ -32,21 +32,21 @@ function Search() {
                 } catch (error) {
                   console.log(error)
                 }
-              };
+              }, [query]);;
     
     useEffect(() => {
-        const handleKeyPress = (event) => {
-          if (event.key === 'Enter') {
-              fetchData();
-          }
-        };
-    
-        document.addEventListener('keypress', handleKeyPress);
-    
-        return () => {
-          document.removeEventListener('keypress', handleKeyPress);
-        };
-      }, [query]);
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      fetchData();
+    }
+  };
+
+  document.addEventListener('keypress', handleKeyPress);
+
+  return () => {
+    document.removeEventListener('keypress', handleKeyPress);
+  };
+}, [fetchData]); // ✅ now valid
     
   return (
     <>
