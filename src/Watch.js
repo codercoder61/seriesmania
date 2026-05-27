@@ -7,7 +7,7 @@ function Watch() {
     const [episode,setEpisode] = useState(1)
     const [season,setSeason] = useState(1)
     
-    const [src,setSrc] = useState(`https://vidsrc.icu/embed/tv/`)
+    const [src,setSrc] = useState(`https://vidsrcme.ru/embed/tv/`)
     const [elements, setElements] = useState([]);
     
     useEffect(() => {
